@@ -1,0 +1,6 @@
+service: 
+  id: ${artifactId}-1
+  name: ${artifactId}
+ 
+service-config:
+  url: http://ip:8500
