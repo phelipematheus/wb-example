@@ -49,6 +49,16 @@ public class ServiceResource<T> {
         return Response.ok(resp).build();
     }
 
+    @PUT
+    public Response save(T object) {
+        logger.info("Salvando %s ".format(object));
+
+        Envelop resp = controller.save(object);
+
+        if (resp.getError() != null) {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).entity(resp).build();
+        }
+        return Response.ok(resp).build();
     }
 
     @GET    
