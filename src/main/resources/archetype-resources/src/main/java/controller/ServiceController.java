@@ -24,6 +24,14 @@ public class ServiceController<T> {
     @Inject @RequestScoped
     private Validation validation;
     
+    public Envelop update(T object) {
+        Envelop resp = validation.isValid(object,validation.isNull(), "Método inválido utilize o PUT para atualizar");
+        if (resp != null) {
+            return resp;
+        }
+        return newEnvelop().item(service.save(object)).build();
+    }
+
     public Envelop save(T object) {
         return newEnvelop().item(service.save(object)).build();
     }
