@@ -38,8 +38,17 @@ public class ServiceResource<T> {
     }
 
     @POST
-    public Response save(T object) {        
-        return Response.ok(controller.save(object)).build();
+    public Response update(T object) {
+        logger.info("Atualizando %s ".format(object));
+
+        Envelop resp = controller.update(object);
+
+        if (resp.getError() != null) {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).entity(resp).build();
+        }
+        return Response.ok(resp).build();
+    }
+
     }
 
     @GET    
