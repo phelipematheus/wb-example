@@ -33,6 +33,10 @@ public class ServiceController<T> {
     }
 
     public Envelop save(T object) {
+        Envelop resp = validation.isValid(object, validation.isNotNull(), "Método inválido utilize o POST para atualizar");
+        if (resp != null) {
+            return resp;
+        }
         return newEnvelop().item(service.save(object)).build();
     }
 
